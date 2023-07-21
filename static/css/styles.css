@@ -1,0 +1,74 @@
+body {
+    background-color: #F4F2DE;
+    color: #CC9C75;
+    padding: 2% 5%;
+}
+
+h1 {
+    color: #809A6F;
+    font-family: "Cambo", serif;
+    font-size: 5rem;
+}
+
+h3 {
+    font-size: 2rem;
+}
+
+a {
+    color: #A25B5B;
+}
+
+.container {
+	 background-color: #94B49F;
+	 color: #fff;
+	 line-height: 1rem;
+	 margin: 2% 0%;
+	 padding: 2% 5%;
+	 width: 100%;
+}
+
+.container h2 {
+    font-family: "Cambo", serif;
+    margin-top: 0;
+    vertical-align: top;
+}
+
+.container p {
+    vertical-align: top;
+}
+
+.fa-brands {
+    font-size: 2.5rem;
+    padding: 0 1%;
+}
+
+.filter-form {
+    padding: 0 2% 0 2%;
+}
+
+.footer {
+    padding: 2%;
+    text-align: center;
+}
+
+.form {
+    padding: 2% 0% 0 1%;
+}
+
+.map {
+    padding: 3%;
+}
+
+.nav {
+    border-bottom-style: solid;
+    border-color: #D5D8B5;
+    padding: 1% 0;
+}
+
+.nav a {
+    padding: 0 2% 0 0;
+}
+
+.rounded {
+    border-radius: 1rem!important;
+}
