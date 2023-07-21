@@ -1,0 +1,70 @@
+{% include "header.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="filter-form col-sm-4">
+            {{ wtf.quick_form(form) }}
+        </div>
+        <div class="map col-sm-6">
+            {% with map=googlemap_obj("map", lat=list[0].latitude, lng=list[0].longitude, markers=markers, fit_markers_to_bounds=True) %} {{map.html}}
+        {{map.js}} {% endwith %}
+        </div>
+    </div>
+    <div class="cafes">
+        {% if list|length == 0 %}
+            <p>There are no cafes matching your search criteria.</p>
+        {% else %}
+            {% for cafe in list %}
+                <div class="container rounded">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h2>{{ cafe.name }}</h2>
+                            <p>{{ cafe.address }}</p>
+                            <p>{{ cafe.location }}</p>
+                            <a href="{{ cafe.website }}">Website</a>
+                        </div>
+                        <div class="col-sm-6">
+                            <p>Tea selection:
+                                {{ cafe.avg_rating }} ⭐
+                            </p>
+                            <p>Seats: {{ cafe.seats }}</p>
+                            <p>Wifi:
+                                {% if cafe.has_wifi == True %}
+                                    ✅
+                                {% else %}
+                                    ❌
+                                {% endif %}
+                            </p>
+                            <p>Sockets:
+                                {% if cafe.has_sockets == True %}
+                                    ✅
+                                {% else %}
+                                    ❌
+                                {% endif %}
+                            </p>
+                            <p>Toilet:
+                                {% if cafe.has_toilet == True %}
+                                    ✅
+                                {% else %}
+                                    ❌
+                                {% endif %}
+                            </p>
+                            {% if current_user.id == 1 %}
+                                <a href="{{ url_for('edit', id=cafe.id) }}" class="button">Update</a>
+                                <a href="{{ url_for('delete', id=cafe.id) }}" class="button">Delete</a>
+                            {% endif %}
+                            {% if logged_in %}
+                                <a href="{{ url_for('rate', id=cafe.id) }}" class="button">Rate this cafe</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+{% endblock %}
+
+{% include "footer.html" %}

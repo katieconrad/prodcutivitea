@@ -1,0 +1,52 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}Halifax Productivitea{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+<!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cambo&display=swap" rel="stylesheet">
+<!--    Font awesome-->
+    <script src="https://kit.fontawesome.com/8fa846fda7.js" crossorigin="anonymous"></script>
+<!--    CSS stylesheet-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<!--Favicon-->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='mug-hot-solid.svg') }}"
+{% endblock %}
+
+{% block content %}
+    <body>
+        <h1>Halifax Productivitea</h1>
+        <h3>Find local cafes to drink great tea and do great work</h3>
+
+  <!-- Navigation-->
+
+        <div class="nav">
+            <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+            {% if not logged_in %}
+            <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+            {% endif %}
+            {% if current_user.id == 1 %}
+            <a class="nav-link" href="{{ url_for('add_cafe') }}">Add Cafe</a>
+            {% endif %}
+            {% if logged_in %}
+            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+            {% endif %}
+        </div>
+
+<!--        Messages-->
+        <div class="messages">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+{% endblock %}
