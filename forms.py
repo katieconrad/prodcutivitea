@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, URLField, SelectField, BooleanField, PasswordField
+from wtforms import StringField, SubmitField, URLField, SelectField, BooleanField, PasswordField, EmailField
 from wtforms.validators import DataRequired, URL
 
 class FilterForm(FlaskForm):
@@ -38,13 +38,13 @@ class DeleteForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    email = StringField("Email:", validators=[DataRequired()])
+    email = EmailField("Email:", validators=[DataRequired()])
     password = PasswordField("Password:", validators=[DataRequired()])
     submit = SubmitField("Login")
 
 
 class RegisterForm(FlaskForm):
-    email = StringField("Email:", validators=[DataRequired()])
+    email = EmailField("Email:", validators=[DataRequired()])
     username = StringField("Username:", validators=[DataRequired()])
     password = PasswordField("Password:", validators=[DataRequired()])
     submit = SubmitField("Register")
