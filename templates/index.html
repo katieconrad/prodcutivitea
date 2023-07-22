@@ -7,11 +7,14 @@
         <div class="filter-form col-sm-4">
             {{ wtf.quick_form(form) }}
         </div>
+        {% if list|length > 0 %}
         <div class="map col-sm-6">
             {% with map=googlemap_obj("map", lat=list[0].latitude, lng=list[0].longitude, markers=markers, fit_markers_to_bounds=True) %} {{map.html}}
         {{map.js}} {% endwith %}
         </div>
+        {% endif %}
     </div>
+    <div class ="row">
     <div class="cafes">
         {% if list|length == 0 %}
             <p>There are no cafes matching your search criteria.</p>
@@ -27,7 +30,7 @@
                         </div>
                         <div class="col-sm-6">
                             <p>Tea selection:
-                                {{ cafe.avg_rating }} ⭐
+                                {{ "{:.1f}".format(cafe.avg_rating) }} ⭐
                             </p>
                             <p>Seats: {{ cafe.seats }}</p>
                             <p>Wifi:
@@ -61,8 +64,10 @@
                         </div>
                     </div>
                 </div>
+
             {% endfor %}
         {% endif %}
+    </div>
     </div>
 
 {% endblock %}
